@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("Iris.csv")
+
+# Display dataset
+print(df.head())
+
+# Dataset information
+print(df.info())
+
+# Datatypes
+print(df.dtypes)
+
+# Histograms
+df.hist(figsize=(10,8))
+
+plt.show()
+
+# Boxplots
+df.plot(kind='box',
+        subplots=True,
+        layout=(2,2),
+        figsize=(10,8))
+
+plt.show()
