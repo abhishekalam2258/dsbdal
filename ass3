@@ -1,0 +1,46 @@
+import pandas as pd
+import numpy as np
+
+# Load dataset
+df = pd.read_csv("Iris.csv")
+
+# Display dataset
+print(df.head())
+
+# Dataset information
+print(df.info())
+
+# Overall statistics
+print(df.describe())
+
+# Group by species
+grouped = df.groupby('Species')
+
+# Mean
+print(grouped.mean(numeric_only=True))
+
+# Median
+print(grouped.median(numeric_only=True))
+
+# Minimum
+print(grouped.min(numeric_only=True))
+
+# Maximum
+print(grouped.max(numeric_only=True))
+
+# Standard deviation
+print(grouped.std(numeric_only=True))
+
+# Create lists
+setosa = df[df['Species'] == 'Iris-setosa']['SepalLengthCm'].tolist()
+
+versicolor = df[df['Species'] == 'Iris-versicolor']['SepalLengthCm'].tolist()
+
+virginica = df[df['Species'] == 'Iris-virginica']['SepalLengthCm'].tolist()
+
+print(setosa)
+print(versicolor)
+print(virginica)
+
+# Species-wise detailed statistics
+print(df.groupby('Species').describe())
