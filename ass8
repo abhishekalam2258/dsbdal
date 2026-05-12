@@ -1,0 +1,61 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = sns.load_dataset('titanic')
+
+# Display dataset
+print(df.head())
+
+# Shape
+print(df.shape)
+
+# Information
+print(df.info())
+
+# Survival count
+sns.countplot(x='survived', data=df)
+
+plt.title("Survival Count")
+
+plt.show()
+
+# Survival based on gender
+sns.countplot(x='survived', hue='sex', data=df)
+
+plt.title("Survival based on Gender")
+
+plt.show()
+
+# Age distribution
+sns.histplot(df['age'], bins=20)
+
+plt.title("Age Distribution")
+
+plt.show()
+
+# Fare histogram
+plt.hist(df['fare'], bins=30)
+
+plt.title("Fare Distribution")
+
+plt.xlabel("Fare")
+
+plt.ylabel("Number of Passengers")
+
+plt.show()
+
+# Fare distribution using seaborn
+sns.histplot(df['fare'], bins=30, kde=True)
+
+plt.title("Fare Distribution with KDE")
+
+plt.show()
+
+# Boxplot
+sns.boxplot(x=df['fare'])
+
+plt.title("Boxplot of Fare")
+
+plt.show()
