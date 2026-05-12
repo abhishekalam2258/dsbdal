@@ -1,0 +1,75 @@
+import pandas as pd
+import numpy as np
+
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import LabelEncoder
+
+# Load dataset
+df = pd.read_csv("Iris.csv")
+
+# Encode categorical variable
+le = LabelEncoder()
+
+df['Species'] = le.fit_transform(df['Species'])
+
+# Features and target
+X = df.iloc[:, 1:5]
+
+y = df['Species']
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.25,
+    random_state=0
+)
+
+# Create model
+model = GaussianNB()
+
+# Train model
+model.fit(X_train, y_train)
+
+# Prediction
+y_pred = model.predict(X_test)
+
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+print(cm)
+
+# Metrics for class 0
+TP = cm[0][0]
+
+FP = cm[:,0].sum() - TP
+
+FN = cm[0,:].sum() - TP
+
+TN = cm.sum() - (TP + FP + FN)
+
+print("TP =", TP)
+print("FP =", FP)
+print("FN =", FN)
+print("TN =", TN)
+
+# Accuracy
+accuracy = (TP + TN) / (TP + TN + FP + FN)
+
+print("Accuracy =", accuracy)
+
+# Error rate
+error_rate = (FP + FN) / (TP + TN + FP + FN)
+
+print("Error Rate =", error_rate)
+
+# Precision
+precision = TP / (TP + FP)
+
+print("Precision =", precision)
+
+# Recall
+recall = TP / (TP + FN)
+
+print("Recall =", recall)
